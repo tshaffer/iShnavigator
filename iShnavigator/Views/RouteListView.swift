@@ -18,7 +18,7 @@ struct RouteListView: View {
                 routeList
             }
         }
-        .navigationTitle("iShnavigator")
+        .navigationTitle("tsShnavigator")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {

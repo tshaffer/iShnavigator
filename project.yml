@@ -1,4 +1,4 @@
-name: iShnavigator
+name: tsShnavigator
 options:
   bundleIdPrefix: com.tedshaffer
   deploymentTarget:
@@ -11,7 +11,7 @@ settings:
     ENABLE_PREVIEWS: YES
 
 targets:
-  iShnavigator:
+  tsShnavigator:
     type: application
     platform: iOS
     deploymentTarget: "17.0"
@@ -19,7 +19,8 @@ targets:
       - iShnavigator
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.tedshaffer.iShnavigator
+        PRODUCT_BUNDLE_IDENTIFIER: com.tedshaffer.tsShnavigator
+        PRODUCT_NAME: tsShnavigator
         INFOPLIST_FILE: iShnavigator/Info.plist
         SWIFT_VERSION: "5.10"
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon

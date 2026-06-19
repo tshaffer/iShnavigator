@@ -36,7 +36,7 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>iShnavigator uses your location to show your position on the route.</string>
+	<string>tsShnavigator uses your location to show your position on the route.</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
