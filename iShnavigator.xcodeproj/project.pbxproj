@@ -1,0 +1,367 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		39D094A73ABFA0339655D946 /* iShnavigatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E81110C3EE114FE58EB181 /* iShnavigatorApp.swift */; };
+		468E1F5365CA65FAB5E2E8B5 /* Waypoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432D660B65608B285AB6D9DF /* Waypoint.swift */; };
+		4FBD5299B49E3DF7A545AD60 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC9E51EE77F287E64725A06 /* ContentView.swift */; };
+		530932DF39A7F396667633AA /* GPXParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5179B957D25D122233A675E0 /* GPXParser.swift */; };
+		5FAFB854D2E36B427F6CFEAC /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7DDB7B33424FA30F583D08 /* AppViewModel.swift */; };
+		6FEF22246929EDC2A23720E5 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316DA57FF713B43FDCD1C597 /* LocationManager.swift */; };
+		7FFCF84BA68902DE506A759A /* RouteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF89C08C37F9EEA2828F992A /* RouteListView.swift */; };
+		A86EBE6C54E10109B296070D /* RouteMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FEFA69F2FF6FE1C125FF751 /* RouteMapView.swift */; };
+		DB520CAB3AE1CF6446568704 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A32977D175C7C93031BDDF7 /* Assets.xcassets */; };
+		FC86B85AAC97F96B7E628231 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9760335A61661340E14FAD58 /* Route.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		27E81110C3EE114FE58EB181 /* iShnavigatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iShnavigatorApp.swift; sourceTree = "<group>"; };
+		316DA57FF713B43FDCD1C597 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		432D660B65608B285AB6D9DF /* Waypoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Waypoint.swift; sourceTree = "<group>"; };
+		5179B957D25D122233A675E0 /* GPXParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPXParser.swift; sourceTree = "<group>"; };
+		6A32977D175C7C93031BDDF7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6DACB191584A729AA2FB817C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		6E7DDB7B33424FA30F583D08 /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
+		7FEFA69F2FF6FE1C125FF751 /* RouteMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteMapView.swift; sourceTree = "<group>"; };
+		9760335A61661340E14FAD58 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
+		ABC9E51EE77F287E64725A06 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		CF89C08C37F9EEA2828F992A /* RouteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteListView.swift; sourceTree = "<group>"; };
+		DA89E54EE9881EE3D13EBA12 /* iShnavigator.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = iShnavigator.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0B49051E38813A90565327D1 = {
+			isa = PBXGroup;
+			children = (
+				F007EBAE15A3CBF30B6571AA /* iShnavigator */,
+				18E8B6936EEB07D0784253B9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0EA2B6209FA8E06E2162BE38 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				6E7DDB7B33424FA30F583D08 /* AppViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		18E8B6936EEB07D0784253B9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DA89E54EE9881EE3D13EBA12 /* iShnavigator.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		45FC4988D46B4C9C9AE0930C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9760335A61661340E14FAD58 /* Route.swift */,
+				432D660B65608B285AB6D9DF /* Waypoint.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		48566F41995F84556A70A3B8 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				5179B957D25D122233A675E0 /* GPXParser.swift */,
+				316DA57FF713B43FDCD1C597 /* LocationManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		7B9FFD119591FADA8534E15C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				ABC9E51EE77F287E64725A06 /* ContentView.swift */,
+				CF89C08C37F9EEA2828F992A /* RouteListView.swift */,
+				7FEFA69F2FF6FE1C125FF751 /* RouteMapView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F007EBAE15A3CBF30B6571AA /* iShnavigator */ = {
+			isa = PBXGroup;
+			children = (
+				6A32977D175C7C93031BDDF7 /* Assets.xcassets */,
+				6DACB191584A729AA2FB817C /* Info.plist */,
+				27E81110C3EE114FE58EB181 /* iShnavigatorApp.swift */,
+				45FC4988D46B4C9C9AE0930C /* Models */,
+				48566F41995F84556A70A3B8 /* Services */,
+				0EA2B6209FA8E06E2162BE38 /* ViewModels */,
+				7B9FFD119591FADA8534E15C /* Views */,
+			);
+			path = iShnavigator;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A5AAC25F2933FA18ACE4F494 /* iShnavigator */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9EB1F7E1B8CC429531271E54 /* Build configuration list for PBXNativeTarget "iShnavigator" */;
+			buildPhases = (
+				2DC31D6D6668F05C1809BC1A /* Sources */,
+				ADDE785A7A2D036D6B5DAC04 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iShnavigator;
+			packageProductDependencies = (
+			);
+			productName = iShnavigator;
+			productReference = DA89E54EE9881EE3D13EBA12 /* iShnavigator.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FDFE281ED28198FA2D767BC3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1620;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = 5ABEF43DF1DD9263682873BD /* Build configuration list for PBXProject "iShnavigator" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 0B49051E38813A90565327D1;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 18E8B6936EEB07D0784253B9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A5AAC25F2933FA18ACE4F494 /* iShnavigator */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		ADDE785A7A2D036D6B5DAC04 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB520CAB3AE1CF6446568704 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2DC31D6D6668F05C1809BC1A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5FAFB854D2E36B427F6CFEAC /* AppViewModel.swift in Sources */,
+				4FBD5299B49E3DF7A545AD60 /* ContentView.swift in Sources */,
+				530932DF39A7F396667633AA /* GPXParser.swift in Sources */,
+				6FEF22246929EDC2A23720E5 /* LocationManager.swift in Sources */,
+				FC86B85AAC97F96B7E628231 /* Route.swift in Sources */,
+				7FFCF84BA68902DE506A759A /* RouteListView.swift in Sources */,
+				A86EBE6C54E10109B296070D /* RouteMapView.swift in Sources */,
+				468E1F5365CA65FAB5E2E8B5 /* Waypoint.swift in Sources */,
+				39D094A73ABFA0339655D946 /* iShnavigatorApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		230EE62E38D4589B5BB4876C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.10;
+			};
+			name = Release;
+		};
+		5CE4829593C784C1FF9400EA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = iShnavigator/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.tedshaffer.iShnavigator;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.10;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5F33E54AB6A1ED9481794FB1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.10;
+			};
+			name = Debug;
+		};
+		971BDA432810452DEFFFCF14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = iShnavigator/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.tedshaffer.iShnavigator;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.10;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5ABEF43DF1DD9263682873BD /* Build configuration list for PBXProject "iShnavigator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5F33E54AB6A1ED9481794FB1 /* Debug */,
+				230EE62E38D4589B5BB4876C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		9EB1F7E1B8CC429531271E54 /* Build configuration list for PBXNativeTarget "iShnavigator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5CE4829593C784C1FF9400EA /* Debug */,
+				971BDA432810452DEFFFCF14 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FDFE281ED28198FA2D767BC3 /* Project object */;
+}
