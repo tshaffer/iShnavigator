@@ -1,6 +1,28 @@
 import SwiftUI
 import MapKit
 
+struct HeadingAnnotation: View {
+    let headingDegrees: Double
+
+    var body: some View {
+        ZStack {
+            // Heading cone behind the dot
+            Image(systemName: "arrowtriangle.up.fill")
+                .font(.system(size: 20))
+                .foregroundStyle(.blue.opacity(0.8))
+                .offset(y: -18)
+                .rotationEffect(.degrees(headingDegrees))
+
+            // Blue dot
+            Circle()
+                .fill(.white)
+                .frame(width: 20, height: 20)
+                .overlay(Circle().fill(.blue).padding(3))
+                .shadow(radius: 2)
+        }
+    }
+}
+
 struct RouteMapView: View {
     let route: Route
     let locationManager: LocationManager
@@ -21,7 +43,23 @@ struct RouteMapView: View {
         Map(position: $position) {
             MapPolyline(coordinates: route.coordinates)
                 .stroke(.orange, style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
-            UserAnnotation()
+
+            if let location = locationManager.currentLocation {
+                let coord = location.coordinate
+                if let heading = locationManager.heading, heading.headingAccuracy >= 0 {
+                    Annotation("", coordinate: coord) {
+                        HeadingAnnotation(headingDegrees: heading.trueHeading)
+                    }
+                } else {
+                    Annotation("", coordinate: coord) {
+                        Circle()
+                            .fill(.white)
+                            .frame(width: 20, height: 20)
+                            .overlay(Circle().fill(.blue).padding(3))
+                            .shadow(radius: 2)
+                    }
+                }
+            }
         }
         .mapControls {
             MapUserLocationButton()
