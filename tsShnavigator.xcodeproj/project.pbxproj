@@ -7,46 +7,38 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A80E30DB2FB50AF8A55617C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFBC68065C88280E44A7042 /* ContentView.swift */; };
-		3127DC17241852F49D0BB19F /* iShnavigatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2F1A3685319EA65F24ECC5 /* iShnavigatorApp.swift */; };
-		38BEF3F85104C26B2E033B36 /* RouteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DE6091752388E160E8FDA1 /* RouteListView.swift */; };
-		430F567313BE9EAAE076F85D /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D63A0CF17F81F8CA23E9B7 /* AppViewModel.swift */; };
-		4AF781F4169FDA73A973A631 /* GPXParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB0455FD59CE53D989EA3C7 /* GPXParser.swift */; };
-		733890F90BBB173C1491E6EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CF4D9ECCEB2E9EF8E2D772F /* Assets.xcassets */; };
-		AF22E709198F325CACFCFB1B /* RouteMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35F8AFB834810383FB2E1F9 /* RouteMapView.swift */; };
-		C68BA6D7FB63FACE69022281 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3D841A4BE6A0CC138D0C33 /* LocationManager.swift */; };
-		C7795A86D494658A9BCD28C6 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = A544D4BAB932535B40D64604 /* Route.swift */; };
-		E4A88E253D63898F6989F7E8 /* Waypoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97067C3FF627F4BC40677F7B /* Waypoint.swift */; };
+		0DC5823DA1ED75FFC97F70C9 /* GPXParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C882D60B7AFB65C234BF78DA /* GPXParser.swift */; };
+		192B6624C7507F4C617F152A /* RouteMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD91F220D3B4F339AE942B60 /* RouteMapView.swift */; };
+		51E5CBA0F02403CEFA187C12 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400FBD975384E34CBEB82F36 /* AppViewModel.swift */; };
+		6EADD4B52AB200FB9E8B647E /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9550269AFB754487D68641EF /* Route.swift */; };
+		B05A6CF88A5D73D96FFD101D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD312CC7212262509340580 /* ContentView.swift */; };
+		BA9E330022F2F566A86E5E8E /* RouteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5448F324E08FE95F1E3DD9EF /* RouteListView.swift */; };
+		BB42C21D3A4EB1F5071E9C49 /* Waypoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2AA8AC134E48D2E35FF9B3 /* Waypoint.swift */; };
+		C4C78A63BD5D7450F3B0BFF2 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10F53E32B3AE25FF9E0AD65 /* LocationManager.swift */; };
+		CC4B1BEE3D0C319600958970 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 31325EC862CD868839E74EC3 /* Assets.xcassets */; };
+		E2A6B8DBC2B3E0AC9F5DFBD1 /* tsShnavigatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0582BF788813CB84F6690D7B /* tsShnavigatorApp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0CF4D9ECCEB2E9EF8E2D772F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		0DB0455FD59CE53D989EA3C7 /* GPXParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPXParser.swift; sourceTree = "<group>"; };
+		0582BF788813CB84F6690D7B /* tsShnavigatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tsShnavigatorApp.swift; sourceTree = "<group>"; };
+		218C1683635078AA85A0801D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		31325EC862CD868839E74EC3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		400FBD975384E34CBEB82F36 /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
+		5448F324E08FE95F1E3DD9EF /* RouteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteListView.swift; sourceTree = "<group>"; };
 		54A623E3052E0BFA0970476C /* tsShnavigator.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = tsShnavigator.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A3D841A4BE6A0CC138D0C33 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
-		97067C3FF627F4BC40677F7B /* Waypoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Waypoint.swift; sourceTree = "<group>"; };
-		A544D4BAB932535B40D64604 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
-		B16084ACBA7720EEC8D3AAE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		C0D63A0CF17F81F8CA23E9B7 /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
-		C35F8AFB834810383FB2E1F9 /* RouteMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteMapView.swift; sourceTree = "<group>"; };
-		CD2F1A3685319EA65F24ECC5 /* iShnavigatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iShnavigatorApp.swift; sourceTree = "<group>"; };
-		CDFBC68065C88280E44A7042 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		F6DE6091752388E160E8FDA1 /* RouteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteListView.swift; sourceTree = "<group>"; };
+		9550269AFB754487D68641EF /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
+		9FD312CC7212262509340580 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		AD91F220D3B4F339AE942B60 /* RouteMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteMapView.swift; sourceTree = "<group>"; };
+		C10F53E32B3AE25FF9E0AD65 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		C882D60B7AFB65C234BF78DA /* GPXParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPXParser.swift; sourceTree = "<group>"; };
+		EC2AA8AC134E48D2E35FF9B3 /* Waypoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Waypoint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
-		130B43794505FDB6849D01D2 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				C0D63A0CF17F81F8CA23E9B7 /* AppViewModel.swift */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
 		43861752F9EE17B70097B3B3 = {
 			isa = PBXGroup;
 			children = (
-				C65732FFDE69519E89A8BD35 /* iShnavigator */,
+				FC6A849B0D4A86CC9F885A66 /* tsShnavigator */,
 				55C55D8D1276AA9B114615CC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -59,46 +51,54 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		70135B0E26B0D4A166A71990 /* Services */ = {
+		74E5369E499BE3A0098AD506 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				0DB0455FD59CE53D989EA3C7 /* GPXParser.swift */,
-				8A3D841A4BE6A0CC138D0C33 /* LocationManager.swift */,
+				400FBD975384E34CBEB82F36 /* AppViewModel.swift */,
 			);
-			path = Services;
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		92020C1C17D4DACA6D220EFC /* Models */ = {
+		77D66713EECAE676DA9A4E46 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				A544D4BAB932535B40D64604 /* Route.swift */,
-				97067C3FF627F4BC40677F7B /* Waypoint.swift */,
+				9550269AFB754487D68641EF /* Route.swift */,
+				EC2AA8AC134E48D2E35FF9B3 /* Waypoint.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
 		};
-		9F171235DD40B9989CD7AD73 /* Views */ = {
+		BCCCFB73F9EB718B9DDF1D8B /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CDFBC68065C88280E44A7042 /* ContentView.swift */,
-				F6DE6091752388E160E8FDA1 /* RouteListView.swift */,
-				C35F8AFB834810383FB2E1F9 /* RouteMapView.swift */,
+				9FD312CC7212262509340580 /* ContentView.swift */,
+				5448F324E08FE95F1E3DD9EF /* RouteListView.swift */,
+				AD91F220D3B4F339AE942B60 /* RouteMapView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		C65732FFDE69519E89A8BD35 /* iShnavigator */ = {
+		E72152E0EB8E182104399743 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				0CF4D9ECCEB2E9EF8E2D772F /* Assets.xcassets */,
-				B16084ACBA7720EEC8D3AAE6 /* Info.plist */,
-				CD2F1A3685319EA65F24ECC5 /* iShnavigatorApp.swift */,
-				92020C1C17D4DACA6D220EFC /* Models */,
-				70135B0E26B0D4A166A71990 /* Services */,
-				130B43794505FDB6849D01D2 /* ViewModels */,
-				9F171235DD40B9989CD7AD73 /* Views */,
+				C882D60B7AFB65C234BF78DA /* GPXParser.swift */,
+				C10F53E32B3AE25FF9E0AD65 /* LocationManager.swift */,
 			);
-			path = iShnavigator;
+			path = Services;
+			sourceTree = "<group>";
+		};
+		FC6A849B0D4A86CC9F885A66 /* tsShnavigator */ = {
+			isa = PBXGroup;
+			children = (
+				31325EC862CD868839E74EC3 /* Assets.xcassets */,
+				218C1683635078AA85A0801D /* Info.plist */,
+				0582BF788813CB84F6690D7B /* tsShnavigatorApp.swift */,
+				77D66713EECAE676DA9A4E46 /* Models */,
+				E72152E0EB8E182104399743 /* Services */,
+				74E5369E499BE3A0098AD506 /* ViewModels */,
+				BCCCFB73F9EB718B9DDF1D8B /* Views */,
+			);
+			path = tsShnavigator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -157,7 +157,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				733890F90BBB173C1491E6EF /* Assets.xcassets in Resources */,
+				CC4B1BEE3D0C319600958970 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,15 +168,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				430F567313BE9EAAE076F85D /* AppViewModel.swift in Sources */,
-				0A80E30DB2FB50AF8A55617C /* ContentView.swift in Sources */,
-				4AF781F4169FDA73A973A631 /* GPXParser.swift in Sources */,
-				C68BA6D7FB63FACE69022281 /* LocationManager.swift in Sources */,
-				C7795A86D494658A9BCD28C6 /* Route.swift in Sources */,
-				38BEF3F85104C26B2E033B36 /* RouteListView.swift in Sources */,
-				AF22E709198F325CACFCFB1B /* RouteMapView.swift in Sources */,
-				E4A88E253D63898F6989F7E8 /* Waypoint.swift in Sources */,
-				3127DC17241852F49D0BB19F /* iShnavigatorApp.swift in Sources */,
+				51E5CBA0F02403CEFA187C12 /* AppViewModel.swift in Sources */,
+				B05A6CF88A5D73D96FFD101D /* ContentView.swift in Sources */,
+				0DC5823DA1ED75FFC97F70C9 /* GPXParser.swift in Sources */,
+				C4C78A63BD5D7450F3B0BFF2 /* LocationManager.swift in Sources */,
+				6EADD4B52AB200FB9E8B647E /* Route.swift in Sources */,
+				BA9E330022F2F566A86E5E8E /* RouteListView.swift in Sources */,
+				192B6624C7507F4C617F152A /* RouteMapView.swift in Sources */,
+				BB42C21D3A4EB1F5071E9C49 /* Waypoint.swift in Sources */,
+				E2A6B8DBC2B3E0AC9F5DFBD1 /* tsShnavigatorApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,7 +188,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				INFOPLIST_FILE = iShnavigator/Info.plist;
+				INFOPLIST_FILE = tsShnavigator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -328,7 +328,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				INFOPLIST_FILE = iShnavigator/Info.plist;
+				INFOPLIST_FILE = tsShnavigator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

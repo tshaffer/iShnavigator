@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct iShnavigatorApp: App {
+struct tsShnavigatorApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
