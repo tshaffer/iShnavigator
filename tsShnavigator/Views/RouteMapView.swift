@@ -108,7 +108,6 @@ struct RouteMapView: View {
             RecordingSummarySheet(
                 recordingManager: recordingManager,
                 onSave: { name in
-                    showingSummary = false
                     onSaveRecording(name)
                 },
                 onDiscard: {

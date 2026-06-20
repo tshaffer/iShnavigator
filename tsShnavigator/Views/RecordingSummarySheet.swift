@@ -6,6 +6,7 @@ struct RecordingSummarySheet: View {
     let onDiscard: () -> Void
 
     @State private var routeName: String = ""
+    @State private var saved = false
     @State private var shareURL: URL?
     @State private var showingShare = false
 
@@ -24,10 +25,18 @@ struct RecordingSummarySheet: View {
 
                 Section {
                     Button {
-                        onSave(routeName)
+                        if !saved {
+                            onSave(routeName)
+                            saved = true
+                        }
                     } label: {
-                        Label("Save to Routes", systemImage: "square.and.arrow.down")
+                        Label(
+                            saved ? "Saved to Routes ✓" : "Save to Routes",
+                            systemImage: saved ? "checkmark.circle.fill" : "square.and.arrow.down"
+                        )
+                        .foregroundStyle(saved ? Color.secondary : Color.accentColor)
                     }
+                    .disabled(saved)
 
                     Button {
                         if let url = GPXExporter.gpxFileURL(name: routeName, locations: recordingManager.recordedLocations) {
@@ -49,6 +58,11 @@ struct RecordingSummarySheet: View {
             }
             .navigationTitle("Recording Complete")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Done") { onDiscard() }
+                }
+            }
         }
         .onAppear {
             routeName = defaultName()
