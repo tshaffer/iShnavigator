@@ -13,6 +13,7 @@ final class AppViewModel {
     var selectedRoute: Route?
     var importState: LoadingState = .idle
     var showingFilePicker = false
+    var showingRecording = false
     let locationManager = LocationManager()
     let recordingManager = RecordingManager()
 

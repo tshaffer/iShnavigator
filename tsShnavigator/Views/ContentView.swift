@@ -15,5 +15,22 @@ struct ContentView: View {
                     )
                 }
         }
+        .sheet(isPresented: $vm.showingRecording) {
+            NavigationStack {
+                RouteMapView(
+                    locationManager: vm.locationManager,
+                    recordingManager: vm.recordingManager,
+                    onSaveRecording: { name in
+                        vm.saveRecording(name: name)
+                        vm.showingRecording = false
+                    }
+                )
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button("Close") { vm.showingRecording = false }
+                    }
+                }
+            }
+        }
     }
 }

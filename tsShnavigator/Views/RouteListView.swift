@@ -23,10 +23,18 @@ struct RouteListView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button {
-                    vm.showingFilePicker = true
-                } label: {
-                    Image(systemName: "plus")
+                HStack {
+                    Button {
+                        vm.showingRecording = true
+                    } label: {
+                        Image(systemName: "record.circle")
+                            .foregroundStyle(.red)
+                    }
+                    Button {
+                        vm.showingFilePicker = true
+                    } label: {
+                        Image(systemName: "plus")
+                    }
                 }
             }
         }

@@ -22,7 +22,7 @@ struct HeadingAnnotation: View {
 }
 
 struct RouteMapView: View {
-    let route: Route
+    let route: Route?
     let locationManager: LocationManager
     let recordingManager: RecordingManager
     let onSaveRecording: (String) -> Void
@@ -30,24 +30,26 @@ struct RouteMapView: View {
     @State private var position: MapCameraPosition
     @State private var showingSummary = false
 
-    init(route: Route, locationManager: LocationManager, recordingManager: RecordingManager, onSaveRecording: @escaping (String) -> Void) {
+    init(route: Route? = nil, locationManager: LocationManager, recordingManager: RecordingManager, onSaveRecording: @escaping (String) -> Void) {
         self.route = route
         self.locationManager = locationManager
         self.recordingManager = recordingManager
         self.onSaveRecording = onSaveRecording
-        if let region = route.region {
+        if let region = route?.region {
             _position = State(initialValue: .region(region))
         } else {
-            _position = State(initialValue: .automatic)
+            _position = State(initialValue: .userLocation(fallback: .automatic))
         }
     }
 
     var body: some View {
         ZStack(alignment: .bottom) {
             Map(position: $position) {
-                // Planned route — orange
-                MapPolyline(coordinates: route.coordinates)
-                    .stroke(.orange, style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
+                // Planned route — orange (only when navigating an existing route)
+                if let route {
+                    MapPolyline(coordinates: route.coordinates)
+                        .stroke(.orange, style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
+                }
 
                 // Recorded track — green
                 if !recordingManager.recordedCoordinates.isEmpty {
@@ -83,7 +85,7 @@ struct RouteMapView: View {
             recordingControls
                 .padding(.bottom, 32)
         }
-        .navigationTitle(route.name)
+        .navigationTitle(route?.name ?? "Record Route")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -170,8 +172,11 @@ struct RouteMapView: View {
     }
 
     private func recenterOnRoute() {
-        guard let region = route.region else { return }
-        withAnimation { position = .region(region) }
+        if let region = route?.region {
+            withAnimation { position = .region(region) }
+        } else {
+            withAnimation { position = .userLocation(fallback: .automatic) }
+        }
     }
 
     private func formatDuration(_ seconds: Int) -> String {
