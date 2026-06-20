@@ -14,6 +14,7 @@ final class AppViewModel {
     var importState: LoadingState = .idle
     var showingFilePicker = false
     let locationManager = LocationManager()
+    let recordingManager = RecordingManager()
 
     init() {
         loadPersistedRoutes()
@@ -42,6 +43,13 @@ final class AppViewModel {
                 }
             }
         }
+    }
+
+    func saveRecording(name: String) {
+        let route = recordingManager.toRoute(name: name)
+        routes.insert(route, at: 0)
+        persistRoutes()
+        recordingManager.discard()
     }
 
     func deleteRoutes(at offsets: IndexSet) {

@@ -1,4 +1,5 @@
 import SwiftUI
+import CoreLocation
 
 struct RouteListView: View {
     @State var vm: AppViewModel
@@ -101,9 +102,31 @@ struct RouteListView: View {
                     }
                     .padding(.vertical, 2)
                 }
+                .swipeActions(edge: .leading) {
+                    if let url = gpxURL(for: route) {
+                        ShareLink(item: url) {
+                            Label("Share GPX", systemImage: "square.and.arrow.up")
+                        }
+                        .tint(.blue)
+                    }
+                }
             }
             .onDelete(perform: vm.deleteRoutes)
         }
+    }
+
+    private func gpxURL(for route: Route) -> URL? {
+        let locations = route.waypoints.map { wp -> CLLocation in
+            let coord = CLLocationCoordinate2D(latitude: wp.latitude, longitude: wp.longitude)
+            return CLLocation(
+                coordinate: coord,
+                altitude: wp.elevation ?? 0,
+                horizontalAccuracy: 5,
+                verticalAccuracy: wp.elevation != nil ? 5 : -1,
+                timestamp: wp.timestamp ?? Date()
+            )
+        }
+        return GPXExporter.gpxFileURL(name: route.name, locations: locations)
     }
 
     private func formatDistance(_ meters: Double) -> String {
