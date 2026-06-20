@@ -3,7 +3,7 @@ import SwiftUI
 struct RecordingSummarySheet: View {
     let recordingManager: RecordingManager
     let onSave: (String) -> Void
-    let onDiscard: () -> Void
+    let onDone: () -> Void
 
     @State private var routeName: String = ""
     @State private var saved = false
@@ -50,7 +50,7 @@ struct RecordingSummarySheet: View {
 
                 Section {
                     Button(role: .destructive) {
-                        onDiscard()
+                        onDone()
                     } label: {
                         Label("Discard Recording", systemImage: "trash")
                     }
@@ -60,7 +60,7 @@ struct RecordingSummarySheet: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Done") { onDiscard() }
+                    Button("Done") { onDone() }
                 }
             }
         }

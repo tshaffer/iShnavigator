@@ -26,15 +26,17 @@ struct RouteMapView: View {
     let locationManager: LocationManager
     let recordingManager: RecordingManager
     let onSaveRecording: (String) -> Void
+    let onDismiss: (() -> Void)?
 
     @State private var position: MapCameraPosition
     @State private var showingSummary = false
 
-    init(route: Route? = nil, locationManager: LocationManager, recordingManager: RecordingManager, onSaveRecording: @escaping (String) -> Void) {
+    init(route: Route? = nil, locationManager: LocationManager, recordingManager: RecordingManager, onSaveRecording: @escaping (String) -> Void, onDismiss: (() -> Void)? = nil) {
         self.route = route
         self.locationManager = locationManager
         self.recordingManager = recordingManager
         self.onSaveRecording = onSaveRecording
+        self.onDismiss = onDismiss
         if let region = route?.region {
             _position = State(initialValue: .region(region))
         } else {
@@ -110,9 +112,10 @@ struct RouteMapView: View {
                 onSave: { name in
                     onSaveRecording(name)
                 },
-                onDiscard: {
+                onDone: {
                     showingSummary = false
                     recordingManager.discard()
+                    onDismiss?()
                 }
             )
         }

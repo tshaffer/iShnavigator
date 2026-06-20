@@ -50,7 +50,6 @@ final class AppViewModel {
         let route = recordingManager.toRoute(name: name)
         routes.insert(route, at: 0)
         persistRoutes()
-        recordingManager.discard()
     }
 
     func deleteRoutes(at offsets: IndexSet) {
