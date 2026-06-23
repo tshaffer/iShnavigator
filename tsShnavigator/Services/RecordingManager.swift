@@ -56,10 +56,20 @@ final class RecordingManager {
         state = .idle
     }
 
+    private static let normalAccuracyThreshold: Double = 50
+    private static let fallbackAccuracyThreshold: Double = 150
+    private static let fallbackInterval: TimeInterval = 10
+
     func addLocation(_ location: CLLocation) {
         guard state == .recording else { return }
-        // Filter out low-accuracy readings
-        guard location.horizontalAccuracy >= 0, location.horizontalAccuracy < 50 else { return }
+        guard location.horizontalAccuracy >= 0 else { return }
+
+        let acceptNormal = location.horizontalAccuracy < Self.normalAccuracyThreshold
+        let timeSinceLast = recordedLocations.last.map { location.timestamp.timeIntervalSince($0.timestamp) } ?? .infinity
+        let acceptFallback = timeSinceLast >= Self.fallbackInterval
+                          && location.horizontalAccuracy < Self.fallbackAccuracyThreshold
+
+        guard acceptNormal || acceptFallback else { return }
         recordedLocations.append(location)
     }
 
