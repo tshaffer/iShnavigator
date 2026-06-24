@@ -1,89 +1,42 @@
 import SwiftUI
 import MapKit
 
-struct HeadingAnnotation: View {
-    let headingDegrees: Double
-
-    var body: some View {
-        ZStack {
-            Image(systemName: "arrowtriangle.up.fill")
-                .font(.system(size: 20))
-                .foregroundStyle(.blue.opacity(0.8))
-                .offset(y: -18)
-                .rotationEffect(.degrees(headingDegrees))
-
-            Circle()
-                .fill(.white)
-                .frame(width: 20, height: 20)
-                .overlay(Circle().fill(.blue).padding(3))
-                .shadow(radius: 2)
-        }
-    }
-}
-
 struct RouteMapView: View {
     let route: Route?
     let locationManager: LocationManager
     let recordingManager: RecordingManager
     let onSaveRecording: (String) -> Void
     let onDismiss: (() -> Void)?
+    @Binding var mapTileStyle: MapTileStyle
 
-    @State private var position: MapCameraPosition
+    @State private var recenterID = UUID()
     @State private var showingSummary = false
 
-    init(route: Route? = nil, locationManager: LocationManager, recordingManager: RecordingManager, onSaveRecording: @escaping (String) -> Void, onDismiss: (() -> Void)? = nil) {
+    init(route: Route? = nil,
+         locationManager: LocationManager,
+         recordingManager: RecordingManager,
+         onSaveRecording: @escaping (String) -> Void,
+         onDismiss: (() -> Void)? = nil,
+         mapTileStyle: Binding<MapTileStyle>) {
         self.route = route
         self.locationManager = locationManager
         self.recordingManager = recordingManager
         self.onSaveRecording = onSaveRecording
         self.onDismiss = onDismiss
-        if let region = route?.region {
-            _position = State(initialValue: .region(region))
-        } else {
-            _position = State(initialValue: .userLocation(fallback: .automatic))
-        }
+        self._mapTileStyle = mapTileStyle
     }
 
     var body: some View {
         ZStack(alignment: .bottom) {
-            Map(position: $position) {
-                // Planned route — orange (only when navigating an existing route)
-                if let route {
-                    MapPolyline(coordinates: route.coordinates)
-                        .stroke(.orange, style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
-                }
+            MapKitView(
+                route: route,
+                recordedCoordinates: recordingManager.recordedCoordinates,
+                tileStyle: mapTileStyle,
+                initialRegion: route?.region,
+                recenterID: recenterID
+            )
+            .ignoresSafeArea()
 
-                // Recorded track — green
-                if !recordingManager.recordedCoordinates.isEmpty {
-                    MapPolyline(coordinates: recordingManager.recordedCoordinates)
-                        .stroke(.green, style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
-                }
-
-                // User location dot + heading
-                if let location = locationManager.currentLocation {
-                    let coord = location.coordinate
-                    if let heading = locationManager.heading, heading.headingAccuracy >= 0 {
-                        Annotation("", coordinate: coord) {
-                            HeadingAnnotation(headingDegrees: heading.trueHeading)
-                        }
-                    } else {
-                        Annotation("", coordinate: coord) {
-                            Circle()
-                                .fill(.white)
-                                .frame(width: 20, height: 20)
-                                .overlay(Circle().fill(.blue).padding(3))
-                                .shadow(radius: 2)
-                        }
-                    }
-                }
-            }
-            .mapControls {
-                MapUserLocationButton()
-                MapCompass()
-                MapScaleView()
-            }
-
-            // Recording controls overlay
             recordingControls
                 .padding(.bottom, 32)
         }
@@ -91,10 +44,30 @@ struct RouteMapView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button {
-                    recenterOnRoute()
-                } label: {
-                    Image(systemName: "arrow.up.left.and.down.right.magnifyingglass")
+                HStack(spacing: 4) {
+                    // Map style picker
+                    Menu {
+                        ForEach(MapTileStyle.allCases) { style in
+                            Button {
+                                mapTileStyle = style
+                            } label: {
+                                Label(
+                                    style.rawValue + (style == mapTileStyle ? " ✓" : ""),
+                                    systemImage: style.systemImage
+                                )
+                            }
+                            .disabled(style.requiresAPIKey && !style.apiKeyConfigured)
+                        }
+                    } label: {
+                        Image(systemName: "map.circle")
+                    }
+
+                    // Recenter button
+                    Button {
+                        recenterID = UUID()
+                    } label: {
+                        Image(systemName: "arrow.up.left.and.down.right.magnifyingglass")
+                    }
                 }
             }
         }
@@ -109,9 +82,7 @@ struct RouteMapView: View {
         .sheet(isPresented: $showingSummary) {
             RecordingSummarySheet(
                 recordingManager: recordingManager,
-                onSave: { name in
-                    onSaveRecording(name)
-                },
+                onSave: { name in onSaveRecording(name) },
                 onDone: {
                     showingSummary = false
                     recordingManager.discard()
@@ -139,7 +110,6 @@ struct RouteMapView: View {
 
         case .recording:
             HStack(spacing: 16) {
-                // Elapsed timer
                 Text(formatDuration(recordingManager.elapsedSeconds))
                     .font(.system(.title3, design: .monospaced))
                     .foregroundStyle(.white)
@@ -147,7 +117,6 @@ struct RouteMapView: View {
                     .padding(.vertical, 10)
                     .background(.black.opacity(0.6), in: Capsule())
 
-                // Distance
                 Text(formatDistance(recordingManager.elapsedDistance))
                     .font(.system(.title3, design: .monospaced))
                     .foregroundStyle(.white)
@@ -155,7 +124,6 @@ struct RouteMapView: View {
                     .padding(.vertical, 10)
                     .background(.black.opacity(0.6), in: Capsule())
 
-                // Stop button
                 Button {
                     recordingManager.stop()
                     showingSummary = true
@@ -170,14 +138,6 @@ struct RouteMapView: View {
 
         case .finished:
             EmptyView()
-        }
-    }
-
-    private func recenterOnRoute() {
-        if let region = route?.region {
-            withAnimation { position = .region(region) }
-        } else {
-            withAnimation { position = .userLocation(fallback: .automatic) }
         }
     }
 

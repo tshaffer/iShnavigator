@@ -16,9 +16,16 @@ final class AppViewModel {
     var showingRecording = false
     let locationManager = LocationManager()
     let recordingManager = RecordingManager()
+    var mapTileStyle: MapTileStyle = .standard {
+        didSet { UserDefaults.standard.set(mapTileStyle.rawValue, forKey: "mapTileStyle") }
+    }
 
     init() {
         loadPersistedRoutes()
+        if let raw = UserDefaults.standard.string(forKey: "mapTileStyle"),
+           let style = MapTileStyle(rawValue: raw) {
+            mapTileStyle = style
+        }
     }
 
     // MARK: - GPX Import

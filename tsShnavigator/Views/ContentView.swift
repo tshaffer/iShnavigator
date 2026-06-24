@@ -11,7 +11,8 @@ struct ContentView: View {
                         route: route,
                         locationManager: vm.locationManager,
                         recordingManager: vm.recordingManager,
-                        onSaveRecording: { name in vm.saveRecording(name: name) }
+                        onSaveRecording: { name in vm.saveRecording(name: name) },
+                        mapTileStyle: $vm.mapTileStyle
                     )
                 }
         }
@@ -21,7 +22,8 @@ struct ContentView: View {
                     locationManager: vm.locationManager,
                     recordingManager: vm.recordingManager,
                     onSaveRecording: { name in vm.saveRecording(name: name) },
-                    onDismiss: { vm.showingRecording = false }
+                    onDismiss: { vm.showingRecording = false },
+                    mapTileStyle: $vm.mapTileStyle
                 )
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {

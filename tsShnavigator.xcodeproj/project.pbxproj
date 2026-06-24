@@ -20,15 +20,19 @@
 		C4C78A63BD5D7450F3B0BFF2 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10F53E32B3AE25FF9E0AD65 /* LocationManager.swift */; };
 		CC4B1BEE3D0C319600958970 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 31325EC862CD868839E74EC3 /* Assets.xcassets */; };
 		E2A6B8DBC2B3E0AC9F5DFBD1 /* tsShnavigatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0582BF788813CB84F6690D7B /* tsShnavigatorApp.swift */; };
+		EF38AF4CCD18F8F760F6DD79 /* MapKitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49828F6D3FE5051991C56B5E /* MapKitView.swift */; };
+		F74196C0EE35B3609DBFE3FE /* MapTileStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE802C4CD70C55DD196882B /* MapTileStyle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0582BF788813CB84F6690D7B /* tsShnavigatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tsShnavigatorApp.swift; sourceTree = "<group>"; };
 		218C1683635078AA85A0801D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		2DE802C4CD70C55DD196882B /* MapTileStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTileStyle.swift; sourceTree = "<group>"; };
 		31325EC862CD868839E74EC3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		400FBD975384E34CBEB82F36 /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
+		49828F6D3FE5051991C56B5E /* MapKitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapKitView.swift; sourceTree = "<group>"; };
 		5448F324E08FE95F1E3DD9EF /* RouteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteListView.swift; sourceTree = "<group>"; };
-		54A623E3052E0BFA0970476C /* tsShnavigator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tsShnavigator.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		54A623E3052E0BFA0970476C /* tsShnavigator.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = tsShnavigator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9550269AFB754487D68641EF /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		9FD312CC7212262509340580 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AD91F220D3B4F339AE942B60 /* RouteMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteMapView.swift; sourceTree = "<group>"; };
@@ -68,6 +72,7 @@
 		77D66713EECAE676DA9A4E46 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				2DE802C4CD70C55DD196882B /* MapTileStyle.swift */,
 				9550269AFB754487D68641EF /* Route.swift */,
 				EC2AA8AC134E48D2E35FF9B3 /* Waypoint.swift */,
 			);
@@ -78,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				9FD312CC7212262509340580 /* ContentView.swift */,
+				49828F6D3FE5051991C56B5E /* MapKitView.swift */,
 				E0DC2972FE58176C305FAC8C /* RecordingSummarySheet.swift */,
 				5448F324E08FE95F1E3DD9EF /* RouteListView.swift */,
 				AD91F220D3B4F339AE942B60 /* RouteMapView.swift */,
@@ -139,6 +145,8 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1620;
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = 462E782C431CFA8643151425 /* Build configuration list for PBXProject "tsShnavigator" */;
 			developmentRegion = en;
@@ -180,6 +188,8 @@
 				3EBE1CA89FB12D620485D122 /* GPXExporter.swift in Sources */,
 				0DC5823DA1ED75FFC97F70C9 /* GPXParser.swift in Sources */,
 				C4C78A63BD5D7450F3B0BFF2 /* LocationManager.swift in Sources */,
+				EF38AF4CCD18F8F760F6DD79 /* MapKitView.swift in Sources */,
+				F74196C0EE35B3609DBFE3FE /* MapTileStyle.swift in Sources */,
 				94C8DE69B45281FC22772561 /* RecordingManager.swift in Sources */,
 				6883CE55E485B15B34C17724 /* RecordingSummarySheet.swift in Sources */,
 				6EADD4B52AB200FB9E8B647E /* Route.swift in Sources */,
@@ -198,7 +208,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = SNCCBFHL45;
 				INFOPLIST_FILE = tsShnavigator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -339,7 +348,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = SNCCBFHL45;
 				INFOPLIST_FILE = tsShnavigator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
