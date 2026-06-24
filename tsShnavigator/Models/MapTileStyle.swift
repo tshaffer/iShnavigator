@@ -1,5 +1,7 @@
 import Foundation
 
+private let thunderforestAPIKey = "YOUR_KEY_HERE"
+
 enum MapTileStyle: String, CaseIterable, Identifiable {
     case standard      = "Standard"
     case hybrid        = "Hybrid"
@@ -26,9 +28,8 @@ enum MapTileStyle: String, CaseIterable, Identifiable {
         case .openTopoMap:
             return "https://tile.opentopomap.org/{z}/{x}/{y}.png"
         case .thunderforest:
-            let key = UserDefaults.standard.string(forKey: "thunderforestAPIKey") ?? ""
-            guard !key.isEmpty else { return nil }
-            return "https://tile.thunderforest.com/outdoors/{z}/{x}/{y}.png?apikey=\(key)"
+            guard !thunderforestAPIKey.isEmpty, thunderforestAPIKey != "YOUR_KEY_HERE" else { return nil }
+            return "https://tile.thunderforest.com/outdoors/{z}/{x}/{y}.png?apikey=\(thunderforestAPIKey)"
         }
     }
 
@@ -36,7 +37,6 @@ enum MapTileStyle: String, CaseIterable, Identifiable {
 
     var apiKeyConfigured: Bool {
         guard requiresAPIKey else { return true }
-        let key = UserDefaults.standard.string(forKey: "thunderforestAPIKey") ?? ""
-        return !key.isEmpty
+        return !thunderforestAPIKey.isEmpty && thunderforestAPIKey != "YOUR_KEY_HERE"
     }
 }
