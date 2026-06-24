@@ -1,6 +1,18 @@
 import SwiftUI
 import MapKit
 
+// MKTileOverlay doesn't set a User-Agent by default; OpenTopoMap blocks requests without one.
+private class UserAgentTileOverlay: MKTileOverlay {
+    override func loadTile(at path: MKTileOverlayPath, result: @escaping (Data?, Error?) -> Void) {
+        let url = url(forTilePath: path)
+        var request = URLRequest(url: url)
+        request.setValue("tsShnavigator/1.0 (iOS; com.tedshaffer.tsShnavigator)", forHTTPHeaderField: "User-Agent")
+        URLSession.shared.dataTask(with: request) { data, _, error in
+            result(data, error)
+        }.resume()
+    }
+}
+
 struct MapKitView: UIViewRepresentable {
     let route: Route?
     let recordedCoordinates: [CLLocationCoordinate2D]
@@ -19,7 +31,6 @@ struct MapKitView: UIViewRepresentable {
         mapView.showsCompass = true
         mapView.showsScale = true
 
-        // User location tracking button
         let trackingButton = MKUserTrackingButton(mapView: mapView)
         trackingButton.translatesAutoresizingMaskIntoConstraints = false
         mapView.addSubview(trackingButton)
@@ -34,7 +45,6 @@ struct MapKitView: UIViewRepresentable {
     func updateUIView(_ mapView: MKMapView, context: Context) {
         let coord = context.coordinator
 
-        // Initial region — set once
         if !coord.hasSetInitialRegion {
             if let region = initialRegion {
                 mapView.setRegion(region, animated: false)
@@ -44,7 +54,6 @@ struct MapKitView: UIViewRepresentable {
             coord.hasSetInitialRegion = true
         }
 
-        // Recenter when triggered
         if coord.lastRecenterID != recenterID {
             coord.lastRecenterID = recenterID
             if let region = initialRegion {
@@ -54,7 +63,6 @@ struct MapKitView: UIViewRepresentable {
             }
         }
 
-        // Update base map style / tile overlay
         if coord.currentTileStyle != tileStyle {
             coord.currentTileStyle = tileStyle
             applyTileStyle(tileStyle, to: mapView, coordinator: coord)
@@ -70,7 +78,8 @@ struct MapKitView: UIViewRepresentable {
             if !routeCoords.isEmpty {
                 let polyline = MKPolyline(coordinates: routeCoords, count: routeCoords.count)
                 coord.routePolyline = polyline
-                mapView.addOverlay(polyline, level: .aboveRoads)
+                // .aboveLabels so polylines always render on top of custom tile overlays
+                mapView.addOverlay(polyline, level: .aboveLabels)
             } else {
                 coord.routePolyline = nil
             }
@@ -85,7 +94,7 @@ struct MapKitView: UIViewRepresentable {
             if !recordedCoordinates.isEmpty {
                 let polyline = MKPolyline(coordinates: recordedCoordinates, count: recordedCoordinates.count)
                 coord.recordingPolyline = polyline
-                mapView.addOverlay(polyline, level: .aboveRoads)
+                mapView.addOverlay(polyline, level: .aboveLabels)
             } else {
                 coord.recordingPolyline = nil
             }
@@ -93,7 +102,6 @@ struct MapKitView: UIViewRepresentable {
     }
 
     private func applyTileStyle(_ style: MapTileStyle, to mapView: MKMapView, coordinator: Coordinator) {
-        // Remove existing tile overlay
         if let existing = coordinator.tileOverlay {
             mapView.removeOverlay(existing)
             coordinator.tileOverlay = nil
@@ -109,21 +117,21 @@ struct MapKitView: UIViewRepresentable {
         case .openTopoMap, .thunderforest:
             mapView.mapType = .mutedStandard
             if let urlTemplate = style.tileURLTemplate {
-                let overlay = MKTileOverlay(urlTemplate: urlTemplate)
+                let overlay = UserAgentTileOverlay(urlTemplate: urlTemplate)
                 overlay.canReplaceMapContent = true
                 coordinator.tileOverlay = overlay
                 mapView.addOverlay(overlay, level: .aboveLabels)
             }
         }
 
-        // Re-add route/recording polylines so they render above the new tile overlay
+        // Re-add polylines above the tile overlay at the same .aboveLabels level
         if let route = coordinator.routePolyline {
             mapView.removeOverlay(route)
-            mapView.addOverlay(route, level: .aboveRoads)
+            mapView.addOverlay(route, level: .aboveLabels)
         }
         if let recording = coordinator.recordingPolyline {
             mapView.removeOverlay(recording)
-            mapView.addOverlay(recording, level: .aboveRoads)
+            mapView.addOverlay(recording, level: .aboveLabels)
         }
     }
 
