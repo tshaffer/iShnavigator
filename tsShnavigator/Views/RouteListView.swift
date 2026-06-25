@@ -3,6 +3,8 @@ import CoreLocation
 
 struct RouteListView: View {
     @State var vm: AppViewModel
+    @State private var routeToRename: Route?
+    @State private var renameText = ""
 
     private static let dateFormatter: DateFormatter = {
         let f = DateFormatter()
@@ -69,6 +71,21 @@ struct RouteListView: View {
                 Text(msg)
             }
         }
+        .alert("Rename Route", isPresented: Binding(
+            get: { routeToRename != nil },
+            set: { if !$0 { routeToRename = nil } }
+        )) {
+            TextField("Route name", text: $renameText)
+            Button("Save") {
+                if let route = routeToRename {
+                    vm.renameRoute(route, to: renameText)
+                }
+                routeToRename = nil
+            }
+            Button("Cancel", role: .cancel) {
+                routeToRename = nil
+            }
+        }
     }
 
     private var emptyState: some View {
@@ -117,6 +134,22 @@ struct RouteListView: View {
                         }
                         .tint(.blue)
                     }
+                }
+                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                    Button(role: .destructive) {
+                        if let idx = vm.routes.firstIndex(of: route) {
+                            vm.deleteRoutes(at: IndexSet([idx]))
+                        }
+                    } label: {
+                        Label("Delete", systemImage: "trash")
+                    }
+                    Button {
+                        renameText = route.name
+                        routeToRename = route
+                    } label: {
+                        Label("Rename", systemImage: "pencil")
+                    }
+                    .tint(.orange)
                 }
             }
             .onDelete(perform: vm.deleteRoutes)

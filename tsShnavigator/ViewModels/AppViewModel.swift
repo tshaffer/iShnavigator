@@ -64,6 +64,13 @@ final class AppViewModel {
         persistRoutes()
     }
 
+    func renameRoute(_ route: Route, to newName: String) {
+        guard let idx = routes.firstIndex(where: { $0.id == route.id }),
+              !newName.trimmingCharacters(in: .whitespaces).isEmpty else { return }
+        routes[idx] = Route(id: route.id, name: newName, waypoints: route.waypoints, importedAt: route.importedAt)
+        persistRoutes()
+    }
+
     func selectRoute(_ route: Route) {
         selectedRoute = route
     }
