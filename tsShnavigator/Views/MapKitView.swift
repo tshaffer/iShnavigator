@@ -13,12 +13,57 @@ private class UserAgentTileOverlay: MKTileOverlay {
     }
 }
 
+// Annotation that marks the user's location for the heading cone view.
+final class HeadingAnnotation: NSObject, MKAnnotation {
+    dynamic var coordinate: CLLocationCoordinate2D
+    init(_ coordinate: CLLocationCoordinate2D) {
+        self.coordinate = coordinate
+    }
+}
+
+// Draws a blue wedge pointing in the current heading direction.
+final class HeadingAnnotationView: MKAnnotationView {
+    static let reuseID = "HeadingCone"
+
+    private static let coneImage: UIImage = {
+        let size = CGSize(width: 60, height: 60)
+        return UIGraphicsImageRenderer(size: size).image { _ in
+            let ctx = UIGraphicsGetCurrentContext()!
+            let cx = size.width / 2, cy = size.height / 2
+            let radius: CGFloat = 26
+            let half: CGFloat = 25 * .pi / 180  // ±25° half-angle
+            ctx.setFillColor(UIColor.systemBlue.withAlphaComponent(0.5).cgColor)
+            ctx.move(to: CGPoint(x: cx, y: cy))
+            // Arc centered at cx,cy, pointing up (−π/2), spanning ±half
+            ctx.addArc(center: CGPoint(x: cx, y: cy),
+                       radius: radius,
+                       startAngle: -.pi / 2 - half,
+                       endAngle: -.pi / 2 + half,
+                       clockwise: false)
+            ctx.closePath()
+            ctx.fillPath()
+        }
+    }()
+
+    override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
+        super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
+        isEnabled = false
+        image = HeadingAnnotationView.coneImage
+        centerOffset = .zero
+    }
+
+    required init?(coder: NSCoder) { fatalError() }
+}
+
+// MARK: - MapKitView
+
 struct MapKitView: UIViewRepresentable {
     let route: Route?
     let recordedCoordinates: [CLLocationCoordinate2D]
     let tileStyle: MapTileStyle
     let initialRegion: MKCoordinateRegion?
-    let recenterID: UUID  // change this value to trigger a recenter
+    let recenterID: UUID
+    let userHeading: Double?  // degrees true north; nil = no heading data
 
     func makeCoordinator() -> Coordinator {
         Coordinator()
@@ -68,29 +113,24 @@ struct MapKitView: UIViewRepresentable {
             applyTileStyle(tileStyle, to: mapView, coordinator: coord)
         }
 
-        // Update route polyline
+        // Route polyline
         let routeCoords = route?.coordinates ?? []
         if coord.routeCoordCount != routeCoords.count {
             coord.routeCoordCount = routeCoords.count
-            if let existing = coord.routePolyline {
-                mapView.removeOverlay(existing)
-            }
+            if let existing = coord.routePolyline { mapView.removeOverlay(existing) }
             if !routeCoords.isEmpty {
                 let polyline = MKPolyline(coordinates: routeCoords, count: routeCoords.count)
                 coord.routePolyline = polyline
-                // .aboveLabels so polylines always render on top of custom tile overlays
                 mapView.addOverlay(polyline, level: .aboveLabels)
             } else {
                 coord.routePolyline = nil
             }
         }
 
-        // Update recording polyline
+        // Recording polyline
         if coord.recordingCoordCount != recordedCoordinates.count {
             coord.recordingCoordCount = recordedCoordinates.count
-            if let existing = coord.recordingPolyline {
-                mapView.removeOverlay(existing)
-            }
+            if let existing = coord.recordingPolyline { mapView.removeOverlay(existing) }
             if !recordedCoordinates.isEmpty {
                 let polyline = MKPolyline(coordinates: recordedCoordinates, count: recordedCoordinates.count)
                 coord.recordingPolyline = polyline
@@ -98,6 +138,37 @@ struct MapKitView: UIViewRepresentable {
             } else {
                 coord.recordingPolyline = nil
             }
+        }
+
+        // Heading cone annotation
+        updateHeadingAnnotation(mapView: mapView, coordinator: coord)
+    }
+
+    private func updateHeadingAnnotation(mapView: MKMapView, coordinator: Coordinator) {
+        let userCoord = mapView.userLocation.coordinate
+        let hasValidLocation = CLLocationCoordinate2DIsValid(userCoord) && userCoord.latitude != 0
+
+        guard let heading = userHeading, hasValidLocation else {
+            if let ann = coordinator.headingAnnotation {
+                mapView.removeAnnotation(ann)
+                coordinator.headingAnnotation = nil
+            }
+            return
+        }
+
+        if coordinator.headingAnnotation == nil {
+            let ann = HeadingAnnotation(userCoord)
+            coordinator.headingAnnotation = ann
+            mapView.addAnnotation(ann)
+        } else {
+            coordinator.headingAnnotation?.coordinate = userCoord
+        }
+
+        // Rotate the cone view to match heading (adjusted for map camera rotation)
+        if let view = mapView.view(for: coordinator.headingAnnotation!) as? HeadingAnnotationView {
+            let mapHeading = mapView.camera.heading
+            let angle = (heading - mapHeading) * .pi / 180
+            view.transform = CGAffineTransform(rotationAngle: angle)
         }
     }
 
@@ -146,6 +217,7 @@ struct MapKitView: UIViewRepresentable {
         var recordingPolyline: MKPolyline?
         var routeCoordCount = -1
         var recordingCoordCount = -1
+        var headingAnnotation: HeadingAnnotation?
 
         func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
             if let tileOverlay = overlay as? MKTileOverlay {
@@ -160,6 +232,15 @@ struct MapKitView: UIViewRepresentable {
                 return renderer
             }
             return MKOverlayRenderer(overlay: overlay)
+        }
+
+        func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+            guard annotation is HeadingAnnotation else { return nil }
+            let view = mapView.dequeueReusableAnnotationView(withIdentifier: HeadingAnnotationView.reuseID)
+                as? HeadingAnnotationView
+                ?? HeadingAnnotationView(annotation: annotation, reuseIdentifier: HeadingAnnotationView.reuseID)
+            view.annotation = annotation
+            return view
         }
     }
 }

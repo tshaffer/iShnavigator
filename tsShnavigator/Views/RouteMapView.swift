@@ -33,7 +33,8 @@ struct RouteMapView: View {
                 recordedCoordinates: recordingManager.recordedCoordinates,
                 tileStyle: mapTileStyle,
                 initialRegion: route?.region,
-                recenterID: recenterID
+                recenterID: recenterID,
+                userHeading: locationManager.heading?.trueHeading
             )
             .ignoresSafeArea()
 
