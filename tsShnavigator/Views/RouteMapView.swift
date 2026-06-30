@@ -98,7 +98,7 @@ struct RouteMapView: View {
         switch recordingManager.state {
         case .idle:
             Button {
-                recordingManager.start()
+                recordingManager.start(locationManager: locationManager)
             } label: {
                 Label("Record", systemImage: "record.circle")
                     .font(.headline)

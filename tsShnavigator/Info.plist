@@ -46,6 +46,12 @@
 	</array>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>tsShnavigator uses your location to show your position on the route.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>tsShnavigator uses your location in the background to keep recording your ride when the screen is locked or the app is minimized.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>location</string>
+	</array>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>

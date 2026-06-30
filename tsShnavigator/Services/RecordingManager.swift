@@ -16,6 +16,7 @@ final class RecordingManager {
 
     private var startTime: Date?
     private var timer: Timer?
+    private weak var locationManager: LocationManager?
 
     var recordedCoordinates: [CLLocationCoordinate2D] {
         recordedLocations.map(\.coordinate)
@@ -30,26 +31,36 @@ final class RecordingManager {
         return total
     }
 
-    func start() {
+    func start(locationManager: LocationManager) {
+        self.locationManager = locationManager
         recordedLocations = []
         elapsedSeconds = 0
         startTime = Date()
         state = .recording
+        locationManager.enableBackgroundTracking()
+        // Use a tolerance so the timer coalesces well; elapsed time is derived from
+        // wall-clock start time so it stays accurate across background/foreground cycles.
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
             guard let self, let start = self.startTime else { return }
             self.elapsedSeconds = Int(Date().timeIntervalSince(start))
         }
+        // Allows the timer to fire while the run loop is in tracking mode (e.g. scrolling)
+        RunLoop.main.add(timer!, forMode: .common)
     }
 
     func stop() {
         timer?.invalidate()
         timer = nil
         state = .finished
+        locationManager?.disableBackgroundTracking()
+        locationManager = nil
     }
 
     func discard() {
         timer?.invalidate()
         timer = nil
+        locationManager?.disableBackgroundTracking()
+        locationManager = nil
         recordedLocations = []
         elapsedSeconds = 0
         startTime = nil

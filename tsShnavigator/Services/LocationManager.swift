@@ -14,19 +14,36 @@ final class LocationManager: NSObject, CLLocationManagerDelegate {
         super.init()
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.activityType = .fitness
+        manager.pausesLocationUpdatesAutomatically = false
         authorizationStatus = manager.authorizationStatus
     }
 
     func requestPermissionAndStart() {
         switch manager.authorizationStatus {
         case .notDetermined:
-            manager.requestWhenInUseAuthorization()
-        case .authorizedWhenInUse, .authorizedAlways:
+            manager.requestAlwaysAuthorization()
+        case .authorizedWhenInUse:
+            // Upgrade to Always so recording survives a locked screen
+            manager.requestAlwaysAuthorization()
+            manager.startUpdatingLocation()
+            manager.startUpdatingHeading()
+        case .authorizedAlways:
             manager.startUpdatingLocation()
             manager.startUpdatingHeading()
         default:
             break
         }
+    }
+
+    /// Call when recording starts — keeps updates flowing while backgrounded.
+    func enableBackgroundTracking() {
+        manager.allowsBackgroundLocationUpdates = true
+    }
+
+    /// Call when recording stops — removes the background entitlement overhead.
+    func disableBackgroundTracking() {
+        manager.allowsBackgroundLocationUpdates = false
     }
 
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
